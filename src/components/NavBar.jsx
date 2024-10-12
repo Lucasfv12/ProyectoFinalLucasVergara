@@ -5,11 +5,10 @@ import CartWidget from './CartWidget'
 const NavBar = () => {
   return (
 <ul>
-      <li><a className="active" href="#home">Home</a></li>
-      <li><a href="#news">Catálogo</a></li>
-      <li><a href="#contact">Más vendidos</a></li>
-      <li><a href="#about">Infantil</a></li>
-      <li><a href="#about">Juvenil</a></li>
+      <li><Link className="active" to="/">Home</Link></li>
+      <li><Link to="/category/nintendo">Catálogo Nintendo</Link></li>
+      <li><Link to="/category/ps5">Catálogo PS5</Link></li>
+      <li><Link to="/category/xbox">Catálogo <Xbox></Xbox></Link></li>
       <CartWidget/>
     </ul>
   )
