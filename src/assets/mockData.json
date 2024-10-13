@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "titulo": "The Legend of Zelda: Breath of the Wild",
+    "descripcion": "Un mundo abierto lleno de aventuras, exploración y desafíos.",
+    "precio": 59.99,
+    "picture": {
+      "url": "./assets/zelda.webp"
+    },
+    "category": "nintendo"
+  },
+  {
+    "id": 2,
+    "titulo": "Super Mario Odyssey",
+    "descripcion": "Únete a Mario en una épica aventura alrededor del mundo.",
+    "precio": 49.99,
+    "picture": {
+      "url": "./assets/SuperMario.png"
+    },
+    "category": "nintendo"
+  },
+  {
+    "id": 3,
+    "titulo": "Demon's Souls",
+    "descripcion": "Un desafiante remake del clásico de acción y RPG.",
+    "precio": 69.99,
+    "picture": {
+      "url": "./assets/DemonSouls.png"
+    },
+    "category": "ps5"
+  },
+  {
+    "id": 4,
+    "titulo": "Spider-Man: Miles Morales",
+    "descripcion": "Conviértete en el nuevo Spider-Man y lucha contra el crimen.",
+    "precio": 49.99,
+    "picture": {
+      "url": "./assets/spiderman.png"
+    },
+    "category": "ps5"
+  },
+  {
+    "id": 5,
+    "titulo": "Halo Infinite",
+    "descripcion": "El regreso de Master Chief en una nueva aventura épica.",
+    "precio": 59.99,
+    "picture": {
+      "url": "./assets/haloInfinite.png"
+    },
+    "category": "xbox"
+  },
+  {
+    "id": 6,
+    "titulo": "Forza Horizon 5",
+    "descripcion": "Una emocionante experiencia de carreras en un mundo abierto.",
+    "precio": 59.99,
+    "picture": {
+      "url": "./assets/haloInfinite5.png"
+    },
+    "category": "xbox"
+  }
+]
