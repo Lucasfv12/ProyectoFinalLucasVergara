@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import "../Styles/Card.scss"
+import { CartContext } from "../context/CartProvider"
 
 const imageMap = {
   1: "/images/zelda.png",
@@ -8,10 +9,11 @@ const imageMap = {
   4: "/images/spiderman.png",
   5: "/images/haloInfinite.png",
   6: "/images/forzaHorizon.png"
-}
+};
 
 const ItemDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
+  const { addItem } = useContext(CartContext)
 
   const itemImage = imageMap[product.id] || "/images/default.png"
 
@@ -21,11 +23,12 @@ const ItemDetail = ({ product }) => {
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      setQuantity((prevQuantity) => prevQuantity - 1)
     }
   };
 
   const handleAddToCart = () => {
+    addItem(product, quantity)
     console.log(`Agregado ${quantity} de ${product.titulo} al carrito`)
   };
 
@@ -52,37 +55,39 @@ const ItemDetail = ({ product }) => {
 
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           <button onClick={handleDecrement} style={{
-                  backgroundColor: "#333",
-                  textDecoration: "none",
-                  borderRadius:"5px",
-                  color: "white",
-                  marginTop: "30px",
-                  padding: "10px 15px",
-                }}>-</button>
+              backgroundColor: "#333",
+              textDecoration: "none",
+              borderRadius: "5px",
+              color: "white",
+              marginTop: "30px",
+              padding: "10px 15px",
+            }}>-</button>
           <span style={{ margin: "0 20px", marginTop:"25px", fontWeight: "bold", display: "flex", alignItems: "center" }}>{quantity}</span>
           <button onClick={handleIncrement} style={{
-                  backgroundColor: "#333",
-                  textDecoration: "none",
-                  borderRadius:"5px",
-                  color: "white",
-                  marginTop: "30px",
-                  padding: "10px 15px",
-                }}>+</button>
+              backgroundColor: "#333",
+              textDecoration: "none",
+              borderRadius: "5px",
+              color: "white",
+              marginTop: "30px",
+              padding: "10px 15px",
+            }}>+</button>
         </div>
 
         <button onClick={handleAddToCart} style={{
-                  backgroundColor: "#333",
-                  textDecoration: "none",
-                  borderRadius:"5px",
-                  color: "white",
-                  marginTop: "30px",
-                  padding: "10px 15px",
-                }}>
+              backgroundColor: "#333",
+              textDecoration: "none",
+              borderRadius: "5px",
+              color: "white",
+              marginTop: "30px",
+              padding: "10px 15px",
+            }}>
           Agregar al carrito
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default ItemDetail
+
+

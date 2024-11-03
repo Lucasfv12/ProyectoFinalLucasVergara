@@ -1,12 +1,13 @@
-import { Routes, Route } from "react-router-dom"
-import NavBar from "./components/NavBar"
-import ItemListContainer from "./components/ItemListContainer"
-import ItemDetailContainer from "./components/ItemDetailContainer"
-import Footer from "./components/Footer"
-import NotFound from "./components/NotFound"
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import ItemListContainer from "./components/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetailContainer";
+import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
+import CartProvider from "./context/CartProvider"; // Asegúrate de que la ruta sea correcta
 
 function App() {
-  const greeting = "¡Bienvenido a nuestra tienda!"
+  const greeting = "¡Bienvenido a nuestra tienda!";
 
   return (
     <>
@@ -17,12 +18,14 @@ function App() {
         <Route path="/item/:id" element={<ItemDetailContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }
 
 export default App;
+
+
 
 
 

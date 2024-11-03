@@ -20,17 +20,17 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     const loadItems = () => {
-      setLoading(true);
+      setLoading(true)
       setTimeout(() => {
         if (id) {
-          const filteredItems = mockData.filter((item) => item.category === id);
-          setItems(filteredItems);
+          const filteredItems = mockData.filter((item) => item.category === id)
+          setItems(filteredItems)
         } else {
-          setItems(mockData);
+          setItems(mockData)
         }
-        setLoading(false);
-      }, 2000);
-    };
+        setLoading(false)
+      }, 2000)
+    }
 
     loadItems()
   }, [id])
@@ -85,8 +85,8 @@ const ItemListContainer = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default ItemListContainer
 
