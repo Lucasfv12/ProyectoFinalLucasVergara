@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import mockData from "../assets/MockData.json"
-import zeldaImage from "../assets/zelda.webp"
-import marioImage from "../assets/SuperMario.png"
-import demonImage from "../assets/DemonSouls.png"
-import spidermanImagen from "../assets/spiderman.png"
-import haloImage from "../assets/haloInfinite.png"
-import forzaImage from "../assets/forzaHorizon.png"
 import "../Styles/Card.scss"
+
+const imageMap = {
+  1: "/images/zelda.png",
+  2: "/images/SuperMario.png",
+  3: "/images/DemonSouls.png",
+  4: "/images/spiderman.png",
+  5: "/images/haloInfinite.png",
+  6: "/images/forzaHorizon.png"
+};
 
 const ItemListContainer = () => {
   const { id } = useParams()
@@ -17,17 +20,17 @@ const ItemListContainer = () => {
 
   useEffect(() => {
     const loadItems = () => {
-      setLoading(true)
+      setLoading(true);
       setTimeout(() => {
         if (id) {
-          const filteredItems = mockData.filter((item) => item.category === id)
-          setItems(filteredItems)
+          const filteredItems = mockData.filter((item) => item.category === id);
+          setItems(filteredItems);
         } else {
-          setItems(mockData)
+          setItems(mockData);
         }
-        setLoading(false)
-      }, 2000)
-    }
+        setLoading(false);
+      }, 2000);
+    };
 
     loadItems()
   }, [id])
@@ -35,7 +38,7 @@ const ItemListContainer = () => {
   if (loading) return <div>Cargando...</div>
 
   return (
-    <div style={{textAlign: "center", marginTop: "20px"}}>
+    <div style={{ textAlign: "center", marginTop: "20px" }}>
       <h1>{greeting}</h1>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {items.map((item) => (
@@ -54,21 +57,7 @@ const ItemListContainer = () => {
             }}
           >
             <img
-              src={
-                item.id === 1
-                  ? zeldaImage
-                  : item.id === 2
-                  ? marioImage
-                  : item.id === 3
-                  ? demonImage
-                  : item.id === 4
-                  ? spidermanImagen
-                  : item.id === 5
-                  ? haloImage
-                  : item.id === 6
-                  ? forzaImage
-                  : item.picture.url
-              }
+              src={imageMap[item.id] || "/images/default.png"}
               alt={item.titulo}
               className="image-hover"
               style={{ width: "100%", height: "auto", borderRadius: "5px" }}
@@ -83,7 +72,7 @@ const ItemListContainer = () => {
                 style={{
                   backgroundColor: "#333",
                   textDecoration: "none",
-                  borderRadius:"5px",
+                  borderRadius: "5px",
                   color: "white",
                   marginTop: "30px",
                   padding: "10px 15px",
@@ -96,8 +85,9 @@ const ItemListContainer = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ItemListContainer
+
 

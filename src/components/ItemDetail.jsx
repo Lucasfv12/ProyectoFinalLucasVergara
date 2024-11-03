@@ -1,52 +1,33 @@
 import React, { useState } from "react"
-import zeldaImage from "../assets/zelda.webp"
-import marioImage from "../assets/SuperMario.png"
-import demonImage from "../assets/DemonSouls.png"
-import spidermanImagen from "../assets/spiderman.png"
-import haloImage from "../assets/haloInfinite.png"
-import forzaImage from "../assets/forzaHorizon.png"
 import "../Styles/Card.scss"
+
+const imageMap = {
+  1: "/images/zelda.png",
+  2: "/images/SuperMario.png",
+  3: "/images/DemonSouls.png",
+  4: "/images/spiderman.png",
+  5: "/images/haloInfinite.png",
+  6: "/images/forzaHorizon.png"
+}
 
 const ItemDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
 
-  let itemImage
-  switch (product.id) {
-    case 1:
-      itemImage = zeldaImage
-      break
-    case 2:
-      itemImage = marioImage
-      break
-    case 3:
-      itemImage = demonImage
-      break
-    case 4:
-      itemImage = spidermanImagen
-      break
-    case 5:
-      itemImage = haloImage
-      break
-    case 6:
-      itemImage = forzaImage
-      break
-    default:
-      itemImage = product.picture.url
-  }
+  const itemImage = imageMap[product.id] || "/images/default.png"
 
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1)
-  }
+  };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1)
+      setQuantity((prevQuantity) => prevQuantity - 1);
     }
-  }
+  };
 
   const handleAddToCart = () => {
     console.log(`Agregado ${quantity} de ${product.titulo} al carrito`)
-  }
+  };
 
   return (
     <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
@@ -65,7 +46,7 @@ const ItemDetail = ({ product }) => {
           className="image-hover"
           style={{ width: "100%", height: "auto", borderRadius: "5px" }}
         />
-        <h3 style={{marginTop:"10px"}}>{product.titulo}</h3>
+        <h3 style={{ marginTop: "10px" }}>{product.titulo}</h3>
         <p>{product.descripcion}</p>
         <p>Precio: ${product.precio.toFixed(2)}</p>
 
@@ -101,7 +82,7 @@ const ItemDetail = ({ product }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ItemDetail
