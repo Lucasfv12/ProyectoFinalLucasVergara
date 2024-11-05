@@ -47,7 +47,7 @@ const Checkout = () => {
       });
 
       setOrderId(docRef.id);
-      clearCart(); 
+      clearCart();
 
       SweetAlert.fire({
         icon: "success",
@@ -64,70 +64,93 @@ const Checkout = () => {
   };
 
   return (
-    <div>
-      <h2>Checkout</h2>
-      {cart.length === 0 ? (
-        <p>No hay productos en el carrito.</p>
-      ) : (
-        <div>
-          <h3>Items en tu orden:</h3>
-          <ul>
-            {cart.map(item => (
-              <li key={item.id}>
-                {item.title} - Cantidad: {item.quantity} - Precio: ${item.price.toFixed(2)}
-              </li>
-            ))}
-          </ul>
-          <h4>Total: ${total.toFixed(2)}</h4>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="firstName"
-              placeholder="Nombre"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Apellido"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Teléfono"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="email"
-              name="emailConfirm"
-              placeholder="Repetir Email"
-              value={formData.emailConfirm}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit">Finalizar Orden</button>
-          </form>
-        </div>
-      )}
-      {orderId && <p>ID de la orden: {orderId}</p>}
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
+      <div style={{
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        padding: "20px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        maxWidth: "500px",
+        textAlign: "center",
+        backgroundColor: "white", // Elimina el fondo gris
+      }}>
+        <h2>Checkout</h2>
+        {cart.length === 0 ? (
+          <p>No hay productos en el carrito.</p>
+        ) : (
+          <div>
+            <h3>Items en tu orden:</h3>
+            <ul style={{backgroundColor: "white", textAlign: "left", listStyleType: "none", padding: 0 }}>
+              {cart.map(item => (
+                <li key={item.id} style={{ backgroundColor: "white", marginBottom: "10px", padding: "10px", borderBottom: "1px solid #ddd" }}>
+                  <p style={{ margin: 0 }}><strong>{item.title}</strong></p>
+                  <p style={{ margin: 0 }}>Cantidad: {item.quantity}</p>
+                  <p style={{ margin: 0 }}>Precio: ${item.price.toFixed(2)}</p>
+                </li>
+              ))}
+            </ul>
+            <h4>Total: ${total.toFixed(2)}</h4>
+            <br />
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="Nombre"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Apellido"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Teléfono"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+              />
+              <input
+                type="email"
+                name="emailConfirm"
+                placeholder="Repetir Email"
+                value={formData.emailConfirm}
+                onChange={handleChange}
+                required
+                style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
+              />
+              <button type="submit" style={{ backgroundColor: "#333", color: "#fff", padding: "10px", borderRadius: "5px", border: "none" }}>
+                Finalizar Orden
+              </button>
+            </form>
+          </div>
+        )}
+        {orderId && <p>ID de la orden: {orderId}</p>}
+      </div>
     </div>
   );
 };
 
 export default Checkout;
+
+
+
 

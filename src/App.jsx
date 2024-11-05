@@ -5,7 +5,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import Cart from "./components/Cart";
-import Checkout from "./components/Checkout"; // Importamos el componente Checkout
+import Checkout from "./components/Checkout"; 
 
 function App() {
   const greeting = "¡Bienvenido a nuestra tienda!";
