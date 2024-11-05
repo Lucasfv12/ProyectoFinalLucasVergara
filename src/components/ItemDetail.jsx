@@ -1,10 +1,9 @@
-// ItemDetail.jsx
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { CartContext } from "../context/CartProvider";
-import Swal from 'sweetalert2'; // Importa SweetAlert
+import Swal from 'sweetalert2'; 
 
 const ItemDetail = () => {
   const { id } = useParams();
@@ -37,7 +36,7 @@ const ItemDetail = () => {
   const handleAddToCart = () => {
     if (addToCart && product) {
       addToCart(product, quantity);
-      // Muestra el popup de SweetAlert
+      
       Swal.fire({
         title: `${product.title} ha sido agregado al carrito!`,
         icon: 'success',

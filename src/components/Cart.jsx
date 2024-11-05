@@ -1,24 +1,17 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartProvider";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem"; 
 import '../Styles/cart.scss'; 
 
 const Cart = () => {
     const { cart, clearCart, removeItem } = useContext(CartContext);
+    const navigate = useNavigate(); 
 
-    // Cálculo del total
     const totalPrice = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);
 
-    const handlePurchase = () => {
-        const order = {
-            buyer: { name: "Nombre", lastName: "Apellido", email: "email@ejemplo.com" },
-            products: cart,
-            total: totalPrice,
-            timestamp: new Date().toLocaleString(),
-        };
-        console.log("Orden creada:", order);
-        clearCart();
+    const handleProceedToCheckout = () => {
+        navigate("/checkout"); 
     };
 
     return (
@@ -29,7 +22,7 @@ const Cart = () => {
                         <CartItem key={item.id} item={item} removeItem={removeItem} /> 
                     ))}
                     <h3 className="total-price">Total: ${totalPrice.toFixed(2)}</h3>
-                    <button onClick={handlePurchase} style={{ backgroundColor: "#333", borderRadius: "5px", color: "white", padding: "10px 15px" }}>Realizar compra</button>
+                    <button onClick={handleProceedToCheckout} style={{ backgroundColor: "#333", borderRadius: "5px", color: "white", padding: "10px 15px" }}>Finalizar compra</button>
                 </>
             ) : (
                 <div className="empty-cart">
@@ -42,6 +35,7 @@ const Cart = () => {
 };
 
 export default Cart;
+
 
 
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "../Styles/CartItem.scss"; 
 import Swal from "sweetalert2";
-import { CartContext } from "../context/CartProvider"; // Asegúrate de importar tu contexto
+import { CartContext } from "../context/CartProvider"; 
 
 const CartItem = ({ item }) => {
     const { removeItem } = useContext(CartContext);

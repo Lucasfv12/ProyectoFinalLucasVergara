@@ -1,4 +1,3 @@
-// CartWidget.jsx
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartProvider";
 import { NavLink } from "react-router-dom";
@@ -14,14 +13,14 @@ const CartWidget = () => {
             style={{
                 display: "flex",
                 alignItems: "center",
-                position: "fixed", // Fija el ícono en la pantalla
-                top: "10px", // Ajusta la distancia desde el borde superior
-                right: "20px", // Ajusta la distancia desde el borde derecho
-                backgroundColor: "#ffffff", // Fondo para hacer que el ícono se destaque
+                position: "fixed", 
+                top: "10px", 
+                right: "20px", 
+                backgroundColor: "#ffffff", 
                 padding: "5px 10px",
                 borderRadius: "5px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                zIndex: 1000 // Asegura que el ícono esté por encima de otros elementos
+                zIndex: 1000 
             }}
         >
             <img
