@@ -1,41 +1,44 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import mockData from "../assets/MockData.json"
-import ItemDetail from "./ItemDetail"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
-  const { id } = useParams()
-  const [item, setItem] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  const fetchItem = (id) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const foundItem = mockData.find((item) => item.id === parseInt(id))
-        resolve(foundItem)
-      }, 2000)
-    })
-  }
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadItem = async () => {
-      const foundItem = await fetchItem(id)
-      setItem(foundItem)
-      setLoading(false)
-    }
+    const fetchProduct = async () => {
+      const productRef = doc(db, "products", id);
+      const productSnap = await getDoc(productRef);
 
-    loadItem()
-  }, [id])
+      if (productSnap.exists()) {
+        setProduct({ id: productSnap.id, ...productSnap.data() });
+      } else {
+        console.log("No existe el producto!");
+      }
+      setLoading(false);
+    };
 
-  if (loading) return <div>Cargando...</div>
-  if (!item) return <div>Producto no encontrado.</div>
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <div>Cargando...</div>;
 
   return (
     <div>
-      <ItemDetail product={item} />
+      {product ? (
+        <ItemDetail product={product} />
+      ) : (
+        <div>No se encontró el producto.</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetailContainer
+export default ItemDetailContainer;
+
+
 

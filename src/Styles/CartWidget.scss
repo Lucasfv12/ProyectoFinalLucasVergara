@@ -1,0 +1,27 @@
+/* CartWidget.scss */
+
+.cart-widget {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.cart-image {
+    width: 40px;
+    height: auto;
+}
+
+.cart-total {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}

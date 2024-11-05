@@ -1,93 +1,91 @@
-import React, { useState, useContext } from "react"
-import "../Styles/Card.scss"
-import { CartContext } from "../context/CartProvider"
+// ItemDetail.jsx
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { CartContext } from "../context/CartProvider";
+import Swal from 'sweetalert2'; // Importa SweetAlert
 
-const imageMap = {
-  1: "/images/zelda.png",
-  2: "/images/SuperMario.png",
-  3: "/images/DemonSouls.png",
-  4: "/images/spiderman.png",
-  5: "/images/haloInfinite.png",
-  6: "/images/forzaHorizon.png"
-};
+const ItemDetail = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
 
-const ItemDetail = ({ product }) => {
-  const [quantity, setQuantity] = useState(1)
-  const { addItem } = useContext(CartContext)
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productRef = doc(db, "products", id);
+        const productSnap = await getDoc(productRef);
 
-  const itemImage = imageMap[product.id] || "/images/default.png"
+        if (productSnap.exists()) {
+          setProduct({ id: productSnap.id, ...productSnap.data() });
+        } else {
+          console.log("No existe el producto!");
+        }
+      } catch (error) {
+        console.error("Error al obtener el producto:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
-  };
+    fetchProduct();
+  }, [id]);
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1)
+  const handleAddToCart = () => {
+    if (addToCart && product) {
+      addToCart(product, quantity);
+      // Muestra el popup de SweetAlert
+      Swal.fire({
+        title: `${product.title} ha sido agregado al carrito!`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
     }
   };
 
-  const handleAddToCart = () => {
-    addItem(product, quantity)
-    console.log(`Agregado ${quantity} de ${product.titulo} al carrito`)
-  };
+  if (loading) return <div>Cargando...</div>;
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
-      <div
-        style={{
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          padding: "10px",
-          width: "300px",
-          textAlign: "center",
-        }}
-      >
-        <img
-          src={itemImage}
-          alt={product.titulo}
-          className="image-hover"
-          style={{ width: "100%", height: "auto", borderRadius: "5px" }}
-        />
-        <h3 style={{ marginTop: "10px" }}>{product.titulo}</h3>
-        <p>{product.descripcion}</p>
-        <p>Precio: ${product.precio.toFixed(2)}</p>
-
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <button onClick={handleDecrement} style={{
-              backgroundColor: "#333",
-              textDecoration: "none",
-              borderRadius: "5px",
-              color: "white",
-              marginTop: "30px",
-              padding: "10px 15px",
-            }}>-</button>
-          <span style={{ margin: "0 20px", marginTop:"25px", fontWeight: "bold", display: "flex", alignItems: "center" }}>{quantity}</span>
-          <button onClick={handleIncrement} style={{
-              backgroundColor: "#333",
-              textDecoration: "none",
-              borderRadius: "5px",
-              color: "white",
-              marginTop: "30px",
-              padding: "10px 15px",
-            }}>+</button>
+    <div>
+      {product ? (
+        <div>
+          <h1>{product.title}</h1>
+          <img src={product.picture} alt={product.title} />
+          <p>{product.description}</p>
+          <p>Precio: ${product.price.toFixed(2)}</p>
+          <p>Stock disponible: {product.stock}</p>
+          <div>
+            <label htmlFor="quantity">Cantidad:</label>
+            <input
+              id="quantity"
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(Math.min(e.target.value, product.stock))}
+              min="1"
+              max={product.stock}
+            />
+          </div>
+          <button onClick={handleAddToCart}>Agregar al carrito</button>
         </div>
-
-        <button onClick={handleAddToCart} style={{
-              backgroundColor: "#333",
-              textDecoration: "none",
-              borderRadius: "5px",
-              color: "white",
-              marginTop: "30px",
-              padding: "10px 15px",
-            }}>
-          Agregar al carrito
-        </button>
-      </div>
+      ) : (
+        <div>No se encontró el producto.</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ItemDetail
+export default ItemDetail;
+
+
+
+
+
+
+
+
+
 
 
