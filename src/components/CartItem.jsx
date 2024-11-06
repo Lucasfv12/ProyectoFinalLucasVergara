@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../Styles/CartItem.scss" 
+import "../Styles/CartItem.scss"; 
 import Swal from "sweetalert2";
 import { CartContext } from "../context/CartProvider"; 
 
